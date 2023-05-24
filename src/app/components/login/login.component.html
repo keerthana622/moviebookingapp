@@ -39,7 +39,7 @@
                             <div class="form-inline fr mt-4">
                                 <a id="forget" class="font-weight-bold">Forget Password?</a>
                             </div>
-                            <button (click)="onSubmit()" type="submit" class="btn btn-block mt-4 w-100 logbtn">Login</button>
+                            <button (click)="onLogin(loginForm.value)" type="submit" class="btn btn-block mt-4 w-100 logbtn">Login</button>
                             <div class="text-center pt-4 text-muted">
                                 Don't have account? <a id="forget" routerLink="/register">Register</a>
                             </div>

@@ -7,62 +7,72 @@
                         <h3 class="pt-2 font-weight-bold">Register</h3>
                     </div>
                     <div class="panel-body p-2">
-                        <form>
+                        <form [formGroup]="registerForm">
                             <div class="form-group pt-1">
-                                <div class="input-field">
+                                <div class="input-field" [class.error]="registerForm.controls['username'].dirty && registerForm.hasError('required','username')">
                                     <span class="fa fa-user p-2"></span>
-                                    <input type="text" placeholder="username">
+                                    <input formControlName="username" type="text" placeholder="username">
                                 </div>
                             </div>
+                            <small *ngIf="registerForm.controls['username'].dirty && registerForm.hasError('required','username')" class="text-danger">username is required*</small>
                             <div class="form-group pt-1">
-                                <div class="input-field">
+                                <div class="input-field" [class.error]="registerForm.controls['firstname'].dirty && registerForm.hasError('required','firstname')">
                                     <span class="fa fa-user p-2"></span>
-                                    <input type="text" placeholder="firstname">
+                                    <input formControlName="firstname" type="text" placeholder="firstname">
                                 </div>
                             </div>
+                            <small *ngIf="registerForm.controls['firstname'].dirty && registerForm.hasError('required','firstname')" class="text-danger">firstname is required*</small>
                             <div class="form-group pt-1">
-                                <div class="input-field">
+                                <div class="input-field" [class.error]="registerForm.controls['lastname'].dirty && registerForm.hasError('required','lastname')" >
                                     <span class="fa fa-user p-2"></span>
-                                    <input type="text" placeholder="lastname">
+                                    <input formControlName="lastname" type="text" placeholder="lastname">
                                 </div>
                             </div>
+                            <small *ngIf="registerForm.controls['lastname'].dirty && registerForm.hasError('required','lastname')" class="text-danger">lastname is required*</small>
                             <div class="form-group pt-1">
-                                <div class="input-field">
+                                <div class="input-field" [class.error]="registerForm.controls['email'].dirty && registerForm.hasError('required','email')">
                                     <span class="fa fa-envelope p-2"></span>
-                                    <input type="email" placeholder="email">
+                                    <input formControlName="email" type="email" placeholder="email">
                                 </div>
                             </div>
+                            <small *ngIf="registerForm.controls['email'].dirty && registerForm.hasError('required','email')" class="text-danger">email is required*</small>
                             <div class="form-group pt-1">
-                                <div class="input-field">
+                                <div class="input-field" [class.error]="registerForm.controls['loginId'].dirty && registerForm.hasError('required','loginId')">
                                     <span class="fa fa-id-badge p-2"></span>
-                                    <input type="text" placeholder="loginId">
+                                    <input formControlName="loginId" type="text" placeholder="loginId">
                                 </div>
                             </div>
+                            <small *ngIf="registerForm.controls['loginId'].dirty && registerForm.hasError('required','loginId')" class="text-danger">loginId is required*</small>
                             <div class="form-group pt-1">
-                                <div class="input-field">
+                                <div class="input-field" [class.error]="registerForm.controls['password'].dirty && registerForm.hasError('required','password')">
                                     <span class="fa fa-lock p-2"></span>
-                                    <input type="password" placeholder="password">
+                                    <input formControlName="password" type="password" placeholder="password">
                                 </div>
                             </div>
+                            <small *ngIf="registerForm.controls['password'].dirty && registerForm.hasError('required','password')" class="text-danger">password is required*</small>
                             <div class="form-group pt-1">
-                                <div class="input-field">
+                                <div class="input-field" [class.error]="registerForm.controls['confirmpassword'].dirty && registerForm.hasError('required','confirmpassword')">
                                     <span class="fa fa-lock p-2"></span>
-                                    <input type="password" placeholder="Confirm Password">
+                                    <input formControlName="confirmpassword" type="password" placeholder="Confirm Password">
                                 </div>
                             </div>
+                            <small *ngIf="registerForm.controls['confirmpassword'].dirty && registerForm.hasError('required','confirmpassword')" class="text-danger">confirmpassword is required*</small>
+                            <small *ngIf="registerForm.hasError('confirmedValidator','confirmpassword')" class="text-danger">Password and Confirm Password must be match.</small>
                             <div class="form-group pt-1">
-                                <div class="input-field">
+                                <div class="input-field" [class.error]="registerForm.controls['contactnumber'].dirty && registerForm.hasError('required','contactnumber')">
                                     <span class="fa fa-phone p-2"></span>
-                                    <input type="text" placeholder="Contact Number">
+                                    <input formControlName="contactnumber" type="text" placeholder="Contact Number">
                                 </div>
                             </div>
+                            <small *ngIf="registerForm.controls['contactnumber'].dirty && registerForm.hasError('required','contactnumber')" class="text-danger">contactnumber is required*</small>
                             <div class="form-group pt-1">
-                                <div class="input-field">
+                                <div class="input-field" [class.error]="registerForm.controls['role'].dirty && registerForm.hasError('required','role')">
                                     <span class="fa fa-regular fa-users p-2"></span>
-                                    <input type="text" placeholder="Role">
+                                    <input formControlName="role" type="text" placeholder="Role">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-block mt-3 w-100 logbtn">Register</button>
+                            <small *ngIf="registerForm.controls['role'].dirty && registerForm.hasError('required','role')" class="text-danger">role is required*</small>
+                            <button (click)="onRegister()" type="submit" class="btn btn-block mt-3 w-100 logbtn">Register</button>
                             <div class="text-center pt-2 text-muted">
                                 Account exists? <a id="forget" routerLink="/login">Login</a>
                             </div>

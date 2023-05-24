@@ -1,0 +1,8 @@
+<h3>Hello dashboard works!</h3>
+<button (click)="logOut()" class="btn btn-danger">LogOut</button>
+
+<ul *ngFor="let movie of movies">
+    <li>{{movie.movieName}}</li>
+    <li>{{movie.theatreName}}</li>
+    <li>{{movie.noOfSeatsAlloted}}</li>
+</ul>
