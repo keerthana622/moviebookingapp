@@ -37,7 +37,7 @@
                             </div>
                             <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger">password is required*</small>
                             <div class="form-inline fr mt-4">
-                                <a id="forget" class="font-weight-bold">Forget Password?</a>
+                                <a id="forget" data-bs-target="#exampleModal" data-bs-toggle="modal" class="font-weight-bold">Forget Password?</a>
                             </div>
                             <button (click)="onLogin(loginForm.value)" type="submit" class="btn btn-block mt-4 w-100 logbtn">Login</button>
                             <div class="text-center pt-4 text-muted">
@@ -55,5 +55,34 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <p class="modal-title" id="exampleModalLabel"><span style="font-size: 25px;font-weight: 700;">Forgot your Password?</span>
+          <br><small>Please provide your Email to send the reset link</small></p>
+          <button type="button" class="close" data-bs-dismiss="modal" style="border-radius: 50%;color: red;background-color: white;" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group pt-2">
+                <div class="input-field">
+                    <span class="fa fa-envelope p-2"></span>
+                    <input [(ngModel)]="resetPasswordEmail" (ngModelChange)="checkValidEmail($event)" type="email" placeholder="email">
+                </div>
+            </div>
+            <small class="text-danger">email is required*</small>
+           
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
     </div>
 </div>

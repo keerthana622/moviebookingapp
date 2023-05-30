@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class UserService {
 
-  currentUser:any;
+  public currentUser:any=JSON.parse(localStorage.getItem('user')|| '{}');
   private baseUrl:string="https://localhost:7108/user/api/v1.0/moviebooking";
   public user!: Observable<ILoginModel>;
   // This will be used to save data locally for token usages.
@@ -42,8 +42,12 @@ export class UserService {
   }
 
   getToken(){
-   this.currentUser=JSON.parse(localStorage.getItem('user')|| '{}');
     return this.currentUser.token;
+  }
+
+  getUserName()
+  {
+    return this.currentUser.user_name;
   }
 
   isLoggedIn():boolean{

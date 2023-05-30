@@ -10,14 +10,34 @@ import { UserService } from 'src/app/services/user.service';
 export class DashboardComponent implements OnInit {
 
   public movies:any=[];
+  public username:string="";
+  public islogin:boolean=false;
 
   constructor(private user:UserService,private movie:MovieService) { }
 
   ngOnInit(): void {
-    this.movie.getMovies().subscribe(res=>{
+    
+    
+    if(this.user.isLoggedIn())
+    {
+      this.islogin=true;
+      this.getUserName();
+      this.movie.getMovies().subscribe(res=>{
       this.movies=res;
-    });
+      console.log(this.movies);
+     });
+    }
   }
+
+  // getAllMovies(){
+
+  // }
+
+  getUserName(){
+    this.username=this.user.getUserName();
+  }
+
+  
 
   logOut(){
     this.user.logout();

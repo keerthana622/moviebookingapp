@@ -1,8 +1,75 @@
-<h3>Hello dashboard works!</h3>
-<button (click)="logOut()" class="btn btn-danger">LogOut</button>
+<!-- <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        
+      <a class="navbar-brand"><h2>BookMovie</h2></a>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <div>
+        <h4>Hello,{{username}}</h4>
+      </div>
+    </div>
+</nav> -->
 
-<ul *ngFor="let movie of movies">
-    <li>{{movie.movieName}}</li>
-    <li>{{movie.theatreName}}</li>
-    <li>{{movie.noOfSeatsAlloted}}</li>
-</ul>
+  <div  >
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container-fluid">
+         <div>
+          <a class="navbar-brand" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="color: white;font-weight: bold;">BookMovie</a>
+        </div>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" >Movies</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Book Tickets</a>
+            </li>
+        </ul>
+        <div>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-danger" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle"  style="color: white;font-weight: bold;background: #000;"  type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Hello,{{username}}
+            </button>
+            <div class="dropdown-menu"  style="background-color:black;border-color:white ;" aria-labelledby="dropdownMenuButton">
+                <a class="nav-item nav-link" style="color: white;padding: 2px;cursor: pointer;" *ngIf="islogin" (click)="logOut()">Logout</a>
+            </div>
+          </div>
+        </div> 
+    </nav>
+  </div>
+
+<div class="col-md-10 offset-md-1 mt-7">
+    <div class="container" >
+        <div class="movie-card" *ngFor="let movie of movies" >
+            <div class="movie-header" style=" background:url(https://i.pinimg.com/736x/64/8b/a3/648ba30ac2f9e5d028e0117c69619539.jpg); background-size:cover; background-position: center; background-repeat: no-repeat; ">
+            </div><!--movie-header-->
+            <div class="movie-content">
+                <div class="movie-content-header">
+                        <h3 class="movie-title">{{movie.movieName}}</h3>
+                </div>
+                <div class="movie-info">
+                    <div class="info-section">
+                        <h5>Theatre</h5>
+                        <h6>{{movie.theatreName}}</h6>
+                    </div><!--date,time-->
+                    <div class="info-section">
+                        <h5>Seats Available</h5>
+                        <h6>{{ movie.noOfSeatsAlloted}} </h6>
+                    </div><!--screen-->
+                </div>
+                <div style="text-align: center;">
+                    <button class="btn btn-outline-danger" style="text-align: center; background-color:black;"><h3>Book Now</h3></button>
+                </div>
+            </div><!--movie-content-->
+        </div><!--movie-card-->
+    </div><!--container-->
+</div>
+    
+  
+  

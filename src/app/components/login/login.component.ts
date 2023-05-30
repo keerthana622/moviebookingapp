@@ -13,7 +13,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm!:FormGroup;
+  public loginForm!:FormGroup;
+  public resetPassword!:string;
+  public isValidEmail!:boolean;
+
 
   constructor(private fb: FormBuilder,private user:UserService,private router:Router,private toastrService: ToastrService) { }
 
@@ -55,5 +58,14 @@ export class LoginComponent implements OnInit {
         console.log("Form is not valid");
     }
   }
+
+  checkValidEmail(event:string){
+    const value=event;
+    const pattern=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    this.isValidEmail=pattern.test(value);
+    return this.isValidEmail;
+  }
+
+
 
 }
