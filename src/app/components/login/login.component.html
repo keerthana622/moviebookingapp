@@ -76,12 +76,13 @@
                     <input [(ngModel)]="resetPasswordEmail" (ngModelChange)="checkValidEmail($event)" type="email" placeholder="email">
                 </div>
             </div>
-            <small class="text-danger">email is required*</small>
+            <small *ngIf="!resetPasswordEmail" class="text-danger">email is required*</small>
+            <small *ngIf="!isValidEmail && resetPasswordEmail" class="text-danger">email is invalid</small>
            
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button id="closeBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="confirmToSend()">Send</button>
         </div>
       </div>
     </div>

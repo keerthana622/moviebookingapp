@@ -16,8 +16,6 @@ export class DashboardComponent implements OnInit {
   constructor(private user:UserService,private movie:MovieService) { }
 
   ngOnInit(): void {
-    
-    
     if(this.user.isLoggedIn())
     {
       this.islogin=true;
@@ -36,8 +34,6 @@ export class DashboardComponent implements OnInit {
   getUserName(){
     this.username=this.user.getUserName();
   }
-
-  
 
   logOut(){
     this.user.logout();

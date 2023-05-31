@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import ValidateForm from 'src/app/shared/validateform';
 import {ILoginModel} from 'src/app/models/loginModel'
 import { ToastrService } from 'ngx-toastr';
+import { ResetPasswordService } from 'src/app/services/reset-password.service';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +15,14 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
 
   public loginForm!:FormGroup;
-  public resetPassword!:string;
+  public resetPasswordEmail!:string;
   public isValidEmail!:boolean;
 
 
-  constructor(private fb: FormBuilder,private user:UserService,private router:Router,private toastrService: ToastrService) { }
+  constructor(private fb: FormBuilder,private user:UserService,
+    private router:Router,
+    private toastrService: ToastrService,
+    private resetService:ResetPasswordService) { }
 
   ngOnInit(): void {
     this.loginForm=this.fb.group({
@@ -61,11 +65,32 @@ export class LoginComponent implements OnInit {
 
   checkValidEmail(event:string){
     const value=event;
-    const pattern=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const pattern=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/;
     this.isValidEmail=pattern.test(value);
     return this.isValidEmail;
   }
 
+  confirmToSend(){
+    if(this.checkValidEmail(this.resetPasswordEmail)){
+      console.log(this.resetPasswordEmail);
+     
 
+      //api call for forgotpassword
+      this.resetService.sendPasswordResetLink(this.resetPasswordEmail)
+      .subscribe({
+        next:(res)=>{
+          this.toastrService.success('ResetToken has been sent successfully',res.message, {
+            timeOut: 3000,
+          });
+          this.resetPasswordEmail="";
+          const buttonRef=document.getElementById("closeBtn");
+          buttonRef?.click();
+        },
+        error:(err)=>{  
+          this.toastrService.error('Email not found',err.message, {timeOut: 3000});
+        }
+      })
+    }
+  }
 
 }
