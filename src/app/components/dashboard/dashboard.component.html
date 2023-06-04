@@ -28,8 +28,8 @@
         </ul>
         <div>
           <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-danger" type="submit">Search</button>
+            <input class="form-control me-2" type="search" placeholder="Search by MovieName" (change)="searchMoviesByName($event)" aria-label="Search" #id>
+            <button class="btn btn-outline-danger"  type="submit">Search</button>
           </form>
         </div>
         <div class="dropdown">
@@ -44,11 +44,12 @@
     </nav>
   </div>
 
+
 <div class="col-md-10 offset-md-1 mt-7">
     <div class="container" >
         <div class="movie-card" *ngFor="let movie of movies" >
-            <div class="movie-header" style=" background:url(https://i.pinimg.com/736x/64/8b/a3/648ba30ac2f9e5d028e0117c69619539.jpg); background-size:cover; background-position: center; background-repeat: no-repeat; ">
-            </div><!--movie-header-->
+            <div class="movie-header" style="background: url({{movie.movieImage}}); background-size:cover; background-position: center; background-repeat: no-repeat; ">
+            </div>
             <div class="movie-content">
                 <div class="movie-content-header">
                         <h3 class="movie-title">{{movie.movieName}}</h3>
@@ -57,19 +58,18 @@
                     <div class="info-section">
                         <h5>Theatre</h5>
                         <h6>{{movie.theatreName}}</h6>
-                    </div><!--date,time-->
+                    </div>
                     <div class="info-section">
                         <h5>Seats Available</h5>
                         <h6>{{ movie.noOfSeatsAlloted}} </h6>
-                    </div><!--screen-->
+                    </div>
                 </div>
                 <div style="text-align: center;">
                     <button class="btn btn-outline-danger" style="text-align: center; background-color:black;"><h3>Book Now</h3></button>
                 </div>
-            </div><!--movie-content-->
-        </div><!--movie-card-->
-    </div><!--container-->
-</div>
-    
+            </div>
+        </div>
+    </div>
+</div> 
   
   
