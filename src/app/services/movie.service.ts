@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Ticket } from '../models/Ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,11 @@ export class MovieService {
 
   private baseUrl:string="https://localhost:7108/movie/api/v1.0/moviebooking";
   //https://localhost:7108/movie/api/v1.0/moviebooking/movies/search/moviename?moviename=Avatar
+  public $cardDataSubject;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) { 
+    this.$cardDataSubject = new BehaviorSubject([]);
+  }
 
   getMovies(){
     return this.http.get<any>(`${this.baseUrl}/all`);
@@ -20,4 +24,15 @@ export class MovieService {
     let queryParams = new HttpParams().append("moviename",searchString);
     return this.http.get<any>(`${this.baseUrl}/movies/search/moviename`,{params:queryParams});
   }
+
+  setCardDetails(cardDetails:any) {
+    this.$cardDataSubject.next(cardDetails);
+  }
+
+  bookMovie(ticketDetails:Ticket) {
+     return this.http.post<any>(`${this.baseUrl}/moviename/add`,ticketDetails); 
+  }
+ 
+
 }
+

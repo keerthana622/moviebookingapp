@@ -12,13 +12,16 @@ import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { ResetComponent } from './components/reset/reset.component';
+import { BookTicketComponent } from './components/book-ticket/book-ticket.component';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    ResetComponent
+    ResetComponent,
+    BookTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +30,7 @@ import { ResetComponent } from './components/reset/reset.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatCardModule,
     ToastrModule.forRoot()
   ],
   providers: [{

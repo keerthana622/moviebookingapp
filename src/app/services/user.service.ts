@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ILoginModel } from '../models/loginModel';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
+import { getLocaleDateTimeFormat } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -50,14 +51,23 @@ export class UserService {
     return this.currentUser.user_name;
   }
 
+  getUserEmail(){
+    return this.currentUser.user_Email;
+  }
+
   isLoggedIn():boolean{
     return !!localStorage.getItem('user');
   }
 
   logout(){
+    // const expires = new Date(this.currentUser.expiration);
+    // let currentdate=new Date().toString();
+    // if(expires.toString()==currentdate){
+    //   localStorage.clear();
+    //   this.router.navigate(['login']);
+    // }
     localStorage.clear();
     this.router.navigate(['login']);
-    
   }
 
 }

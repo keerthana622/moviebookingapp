@@ -62,6 +62,10 @@ export class DashboardComponent implements OnInit {
     
   }
 
+  onBookNow(index:number){  
+    this.movie.setCardDetails(this.movies[index]);
+  }
+
   loadMovies() {
     this.movie.getMovies().subscribe(res=>{
       this.movies=res;

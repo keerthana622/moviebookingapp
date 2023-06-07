@@ -1,0 +1,89 @@
+<!-- <div class="outer">
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+                <div class="panel border bg-white">
+                    <div class="panel-heading">
+                        <h3 class="pt-3 font-weight-bold">Book Ticket</h3>
+                    </div>
+                    <div class="panel-body p-2">
+                        <form [formGroup]="TicketForm">
+                            <div class="form-group pt-2">
+                                <div class="input-field">
+                                    <span class="fa fa-envelope p-2"></span>
+                                    <input formControlName="email" type="text" placeholder="email" [value]='useremail' readonly>
+                                </div>
+                            </div>
+                            <div class="form-group pt-2">
+                                <div class="input-field">
+                                    <span class="fa fa-film  p-2"></span>
+                                    <input formControlName="movieName" type="text" placeholder="movieName" [value]='movieName' readonly>
+                                </div>
+                            </div>
+                            <div class="form-group pt-2">
+                                <div class="input-field">
+                                    <span class="fa fa-building p-2"></span>
+                                    <input formControlName="theatreName" type="text" placeholder="theatreName" [value]='theatreName' readonly>
+                                </div>
+                            </div>
+                            <div class="form-group pt-2">
+                                <div class="input-field">
+                                    <span class="fa fa-ticket p-2"></span>
+                                    <input formControlName="numberOfTickets" type="number" placeholder="numberOfTickets">
+                                </div>
+                            </div>
+                            <small *ngIf="TicketFormAX.hasError('required','numberOfTickets')" class="text-danger">numberOfTickets is required*</small>
+                            <div class="form-group pt-2">
+                                <div class="input-field">
+                                    <span class="fa  fa-users p-2"></span>
+                                    <input formControlName="seats" type="text" placeholder="seats booked" [value]="seats" readonly>
+                                </div>
+                            </div>
+                            <button  type="submit" class="btn btn-block mt-4 w-100 logbtn">Confirm & Book</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ -->
+
+
+<div>
+
+    <mat-card class="card" class="col-md-4 offset-md-4 mt-3">
+
+        <mat-card style="background-color: rgb(73, 108, 145); color: white;">
+            <h2>Movie Ticket Overview</h2>
+        </mat-card>
+        <br>
+        <mat-card>
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{cardDetails.movieImage}}" style="width: 100px;height: 100px;" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h1 class="card-title">{{cardDetails.movieName}}</h1>
+                        <h4 class="card-text" class="text-muted">User : {{useremail}}.</h4>
+                        <h3 class="card-text" class="text-muted">Theatre : {{cardDetails.theatreName}}</h3>
+                        <h4 class="card-text" class="text-muted">Tickets: <input type="number" 
+                            placeholder="Select no of Tickets" #Ticketinput (change)="generateSeatNumbers()"/></h4>
+                        <h4 class="card-text" class="text-muted" >Seats : {{seats}}</h4>
+
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+        <mat-card style="background-color: rgb(46, 59, 73); color: white;">
+            <h4>Conformation</h4>
+            <h5>You are about to book tickets for {{cardDetails.movieName}} in BookMovie.</h5>
+        </mat-card>
+    </mat-card>
+
+    <mat-card class="col-md-4 offset-md-4 mt-3" style="background-color: rgb(43, 44, 44); color: white;">
+        <button mat-raised-button  class="col offset-md-4" (click)="bookTicket()">Confirm Booking</button>
+    </mat-card>
+</div>
