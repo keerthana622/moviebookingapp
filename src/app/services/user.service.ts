@@ -4,21 +4,22 @@ import { ILoginModel } from '../models/loginModel';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { getLocaleDateTimeFormat } from '@angular/common';
+import { ILoginModelResponse } from '../models/loginResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  public currentUser:any=JSON.parse(localStorage.getItem('user')|| '{}');
+  //public currentUser:any=JSON.parse(localStorage.getItem('user')|| '{}');
   private baseUrl:string="https://localhost:7108/user/api/v1.0/moviebooking";
-  public user!: Observable<ILoginModel>;
+  public user!: Observable<ILoginModelResponse>;
   // This will be used to save data locally for token usages.
-   private userSubject!:BehaviorSubject<ILoginModel>;
+   private userSubject!:BehaviorSubject<ILoginModelResponse>;
 
   constructor(private http:HttpClient,private router:Router) {
     // Returns the localstored user and added in userSubject.
-    this.userSubject =  new BehaviorSubject<ILoginModel>(JSON.parse(localStorage.getItem('user')!));
+    this.userSubject =  new BehaviorSubject<ILoginModelResponse>(JSON.parse(localStorage.getItem('user')!));
     this.user = this.userSubject.asObservable();
    }
 
@@ -38,21 +39,26 @@ export class UserService {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user',JSON.stringify(user));
             this.userSubject.next(user);
+            console.log(user);
             return  user;
       })) ;
   }
 
   getToken(){
-    return this.currentUser.token;
+    return this.userSubject.value.token;
   }
 
   getUserName()
   {
-    return this.currentUser.user_name;
+    return this.userSubject.value.username;
   }
 
   getUserEmail(){
-    return this.currentUser.user_Email;
+    return this.userSubject.value.email;
+  }
+
+  getUserRole(){
+    return this.userSubject.value.role;
   }
 
   isLoggedIn():boolean{

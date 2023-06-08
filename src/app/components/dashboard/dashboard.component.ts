@@ -12,20 +12,24 @@ import { UserService } from 'src/app/services/user.service';
 export class DashboardComponent implements OnInit {
 
   public movies:any=[];
-  public username:string="";
+  public username!:string;
+  public role!:string;
   public islogin:boolean=false;
+  public isAdmin!:boolean;
+
 
   constructor(private user:UserService,
     private movie:MovieService,
-    private toastrService: ToastrService,
-    private elementRef:ElementRef) { }
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     if(this.user.isLoggedIn())
     {
       this.islogin=true;
+      this.checkUserRole();
       this.getUserName();
       this.loadMovies();
+
     }
     
   }
@@ -75,6 +79,16 @@ export class DashboardComponent implements OnInit {
 
   getUserName(){
     this.username=this.user.getUserName();
+  }
+
+  checkUserRole(){
+    this.role=this.user.getUserRole();
+    if(this.role=='Admin'){
+      this.isAdmin=true;
+    }
+    else{
+      this.isAdmin=false;
+    }
   }
 
   logOut(){
