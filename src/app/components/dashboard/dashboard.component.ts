@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   public role!:string;
   public islogin:boolean=false;
   public isAdmin!:boolean;
+  public userDetails!:any;
 
 
   constructor(private user:UserService,
@@ -26,10 +27,9 @@ export class DashboardComponent implements OnInit {
     if(this.user.isLoggedIn())
     {
       this.islogin=true;
+      this.username=this.user.getUserName();
       this.checkUserRole();
-      this.getUserName();
       this.loadMovies();
-
     }
     
   }
@@ -75,10 +75,6 @@ export class DashboardComponent implements OnInit {
       this.movies=res;
       console.log(this.movies);
      });
-  }
-
-  getUserName(){
-    this.username=this.user.getUserName();
   }
 
   checkUserRole(){

@@ -1,0 +1,35 @@
+<div class="outer">
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+                <div class="panel border bg-white">
+                    <div class="panel-heading">
+                        <h3 class="pt-3 font-weight-bold">Edit/Delete Movie</h3>
+                    </div>
+                    <div class="panel-body p-3">
+                        <form [formGroup]="updateMovieForm">
+                            <div class="form-group pt-2">
+                                <div class="input-field" [class.error]="updateMovieForm.controls['movieName'].dirty && updateMovieForm.hasError('required','movieName')">
+                                    <span class="fa fa-film p-2"></span>
+                                    <input formControlName="movieName" type="text" placeholder="MovieName">
+                                </div>
+                            </div>
+                            <small *ngIf="updateMovieForm.controls['movieName'].dirty && updateMovieForm.hasError('required','movieName')" class="text-danger">MovieName is required*</small>
+                            <div class="form-group pt-2">
+                                <div class="input-field" [class.error]="updateMovieForm.controls['theatreName'].dirty && updateMovieForm.hasError('required','theatreName')">
+                                    <span class="fa fa-building p-2"></span>
+                                    <input formControlName="theatreName" type="text" placeholder="theatreName">
+                                </div>
+                            </div>
+                            <small *ngIf="updateMovieForm.controls['theatreName'].dirty && updateMovieForm.hasError('required','theatreName')" class="text-danger">theatreName is required*</small>
+                            <div id="outer1" style="text-align: end;">
+                            <button  (click)="update()" type="submit" class="btn btn-block mt3 logbtn inner1">Update</button>
+                            <button  (click)="delete()" type="submit" class="btn btn-block mt3 logbtn inner1">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

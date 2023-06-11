@@ -1,11 +1,6 @@
-export interface ILoginModel
-{
-    username:string,
-    loginId:string,
-    email:string,
-    password:string,
-    token:string,
-    expirationDate:Date,
-    role:string
-
+export interface ILoginModel{
+    username:string;
+    email:string;
+    loginId:string;
+    password:string;
 }

@@ -18,9 +18,6 @@ export class BookTicketComponent implements OnInit {
   public cardDetails!:any;
   public useremail!:string;
   public TicketsBooked!:number;
-  // public movieName!:string;
-  // public theatreName!:string;
-  // public noOfSeatsAlloted!:string;
   public seats!:any;
   public ticketObj = new Ticket();
   
@@ -31,7 +28,7 @@ export class BookTicketComponent implements OnInit {
     private router:Router) {
     this.movieService.$cardDataSubject.subscribe({
       next:(cardDetails) => this.cardDetails = cardDetails});
-    this.useremail=this.userService.getUserEmail();
+    this.useremail=this.userService.decodeToken.email;
     
    }
 

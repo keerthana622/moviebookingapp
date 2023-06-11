@@ -14,6 +14,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { ResetComponent } from './components/reset/reset.component';
 import { BookTicketComponent } from './components/book-ticket/book-ticket.component';
 import { MatCardModule } from '@angular/material/card';
+import { UpdateMovieComponent } from './components/update-movie/update-movie.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { MatCardModule } from '@angular/material/card';
     RegisterComponent,
     DashboardComponent,
     ResetComponent,
-    BookTicketComponent
+    BookTicketComponent,
+    UpdateMovieComponent
   ],
   imports: [
     BrowserModule,

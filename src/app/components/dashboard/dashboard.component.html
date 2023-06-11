@@ -23,11 +23,11 @@
               <a class="nav-link active" aria-current="page" >Movies</a>
             </li>
             <li class="nav-item" *ngIf="isAdmin">
-              <a class="nav-link active" aria-current="page" >Update Movie</a>
+              <a class="nav-link active" routerLink="/update-movie" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="color: white;font-weight: bold;" aria-current="page" >Update Movie</a>
             </li>
-            <li class="nav-item" *ngIf="isAdmin">
+            <!-- <li class="nav-item" *ngIf="isAdmin">
               <a class="nav-link active" aria-current="page" >Delete Movie</a>
-            </li>
+            </li> -->
             <!-- <li class="nav-item">
               <a class="nav-link" routerLink="/book-ticket" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Book Tickets</a>
             </li> -->

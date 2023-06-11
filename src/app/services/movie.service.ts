@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Ticket } from '../models/Ticket';
+import { GetMovieRequest } from '../models/GetMovieRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,18 @@ export class MovieService {
 
   bookMovie(ticketDetails:Ticket) {
      return this.http.post<any>(`${this.baseUrl}/moviename/add`,ticketDetails); 
+  }
+
+  updateMovie(movieUpdateObj:GetMovieRequest)
+  {
+    //let queryParams = new HttpParams().append("moviename",movieUpdateObj.movieName).append("theatreName",movieUpdateObj.theatreName);
+    return this.http.put<any>(`${this.baseUrl}/moviename/update/ticket`,movieUpdateObj);
+  }
+
+  deleteMovie(movieDeleteObj:GetMovieRequest)
+  {
+    let queryParams = new HttpParams().append("moviename",movieDeleteObj.movieName).append("theatreName",movieDeleteObj.theatreName);
+    return this.http.put<any>(`${this.baseUrl}/moviename/delete/id`,{params:queryParams});
   }
  
 
