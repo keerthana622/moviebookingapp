@@ -43,7 +43,7 @@ export class MovieService {
   deleteMovie(movieDeleteObj:GetMovieRequest)
   {
     let queryParams = new HttpParams().append("moviename",movieDeleteObj.movieName).append("theatreName",movieDeleteObj.theatreName);
-    return this.http.put<any>(`${this.baseUrl}/moviename/delete/id`,{params:queryParams});
+    return this.http.delete<any>(`${this.baseUrl}/moviename/delete/id`,{params:queryParams});
   }
  
 
