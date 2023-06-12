@@ -31,8 +31,7 @@ export class UpdateMovieComponent implements OnInit {
     if(this.updateMovieForm.valid){
         this.movieDetailsObj=this.updateMovieForm.value;
 
-        this.movieService.updateMovie(this.movieDetailsObj)
-        .subscribe({
+        this.movieService.updateMovie(this.movieDetailsObj).subscribe({
         next:(res)=>{
           console.log(res);
           this.toastrService.success('Movie  Details Updated Successfully',res.message, {
