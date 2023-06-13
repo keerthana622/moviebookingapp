@@ -20,7 +20,8 @@ export class BookTicketComponent implements OnInit {
   public TicketsBooked!:number;
   public seats!:any;
   public ticketObj = new Ticket();
-  
+  public seatsrowIntheatre!:any;
+  public seatsclmIntheatre!:any;
 
   constructor(private movieService:MovieService,
     private userService:UserService,
@@ -28,11 +29,32 @@ export class BookTicketComponent implements OnInit {
     private router:Router) {
     this.movieService.$cardDataSubject.subscribe({
       next:(cardDetails) => this.cardDetails = cardDetails});
-    this.useremail=this.userService.decodeToken.email;
+    this.useremail=this.userService.getUserData();
     
    }
 
   ngOnInit(): void {
+    this.generateSeats();
+  }
+
+  getChar(i: number){
+    return String.fromCharCode(i);
+  }
+  generateSeats(){
+    //this.seatsrowIntheatre = Array.from({length:(this.cardDetails.noOfSeatsAlloted / 10)});
+    this.seatsclmIntheatre = Array.from(
+      { length: 10},
+      (value, index) => 1 + index * 1
+      );
+    let stop = (65+(this.cardDetails.noOfSeatsAlloted / 10));
+    let start  = 65;
+    let step = 1;
+    this.seatsrowIntheatre  = Array.from(
+      { length: (stop - start) / step + 1 },
+      (value, index) => start + index * step
+      );
+      console.log(this.seatsrowIntheatre);
+      console.log(this.seatsclmIntheatre);
   }
 
   generateSeatNumbers(){

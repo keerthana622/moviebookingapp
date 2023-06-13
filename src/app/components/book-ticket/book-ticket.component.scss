@@ -118,3 +118,38 @@ img{
   .text-muted{
      font-size: 16px;
   }
+
+  .bk-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .seat-container{
+    width: 50%;
+    height: 50%;
+  }
+
+  .clmalgin{
+    margin-right: 5px;
+    color: #000;
+  }
+  .seatsrow{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 6px;
+  }
+  .seats{
+    box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   width: 32px;
+  height: 32px;
+  border-radius: 100px;
+  background-color: grey;
+  margin-bottom: 6px;
+  }

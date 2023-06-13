@@ -35,9 +35,13 @@ export class UserService {
     if(this.isLoggedIn()){
     var token = localStorage.getItem('token');
     this.decodeToken=jwt_decode(token!);
-    return this.decodeToken;
+    return this.decodeToken.email;
     }
   }
+
+  // getUserEmail(){
+  //   return this.decodeToken.email;
+  // }
 
   getUserName(){
     return localStorage.getItem('username')!;

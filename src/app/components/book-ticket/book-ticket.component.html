@@ -1,4 +1,4 @@
-<!-- <div class="outer">
+ <!-- <div class="outer">
     <div class="container">
         <div class="row">
             <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
@@ -51,39 +51,53 @@
  -->
 
 
-<div>
+<div class="bk-container">
 
-    <mat-card class="card" class="col-md-4 offset-md-4 mt-3">
+    <div>
+        <mat-card class="card" >
 
-        <mat-card style="background-color: rgb(73, 108, 145); color: white;">
-            <h2>Movie Ticket Overview</h2>
-        </mat-card>
-        <br>
-        <mat-card>
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{cardDetails.movieImage}}" style="width: 100px;height: 100px;" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h1 class="card-title">{{cardDetails.movieName}}</h1>
-                        <h4 class="card-text" class="text-muted">User : {{useremail}}.</h4>
-                        <h3 class="card-text" class="text-muted">Theatre : {{cardDetails.theatreName}}</h3>
-                        <h4 class="card-text" class="text-muted">Tickets: <input type="number" 
-                            placeholder="Select no of Tickets" #Ticketinput (change)="generateSeatNumbers()"/></h4>
-                        <h4 class="card-text" class="text-muted" >Seats : {{seats}}</h4>
-
+            <mat-card style="background-color: rgb(73, 108, 145); color: white;">
+                <h2>Movie Ticket Overview</h2>
+            </mat-card>
+            <br>
+            <mat-card>
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{cardDetails.movieImage}}" style="width: 100px;height: 100px;" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h1 class="card-title">{{cardDetails.movieName}}</h1>
+                            <h4 class="card-text" class="text-muted">User : {{useremail}}.</h4>
+                            <h3 class="card-text" class="text-muted">Theatre : {{cardDetails.theatreName}}</h3>
+                            <h4 class="card-text" class="text-muted">Tickets: <input type="number" 
+                                placeholder="Select no of Tickets" #Ticketinput (change)="generateSeatNumbers()"/></h4>
+                            <h4 class="card-text" class="text-muted" >Seats : {{seats}}</h4>
+    
+                        </div>
                     </div>
                 </div>
+            </mat-card>
+            <mat-card style="background-color: rgb(46, 59, 73); color: white;">
+                <h4>Conformation</h4>
+                <h5>You are about to book tickets for {{cardDetails.movieName}} in BookMovie.</h5>
+            </mat-card>
+        </mat-card>
+    
+        <mat-card style="background-color: rgb(43, 44, 44); color: white;">
+            <button mat-raised-button  class="col offset-md-4" (click)="bookTicket()">Confirm Booking</button>
+        </mat-card>
+    </div>
+    <div class="seat-container">
+        <mat-card>
+            <div class="seatsrow" *ngFor="let i of seatsrowIntheatre">
+               <mat-card class="seats">
+                    <p>{{getChar(i)}}</p>
+               </mat-card> 
+               <mat-card class="seats clmalgin" *ngFor="let k of seatsclmIntheatre">
+                    <p>{{k}}</p>
+                </mat-card> 
             </div>
         </mat-card>
-        <mat-card style="background-color: rgb(46, 59, 73); color: white;">
-            <h4>Conformation</h4>
-            <h5>You are about to book tickets for {{cardDetails.movieName}} in BookMovie.</h5>
-        </mat-card>
-    </mat-card>
-
-    <mat-card class="col-md-4 offset-md-4 mt-3" style="background-color: rgb(43, 44, 44); color: white;">
-        <button mat-raised-button  class="col offset-md-4" (click)="bookTicket()">Confirm Booking</button>
-    </mat-card>
+    </div>
 </div>
