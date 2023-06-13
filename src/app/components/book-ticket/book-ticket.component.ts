@@ -22,6 +22,8 @@ export class BookTicketComponent implements OnInit {
   public ticketObj = new Ticket();
   public seatsrowIntheatre!:any;
   public seatsclmIntheatre!:any;
+  selected: string[] = [];
+  reserved: string[] = [];
 
   constructor(private movieService:MovieService,
     private userService:UserService,
@@ -36,6 +38,20 @@ export class BookTicketComponent implements OnInit {
   ngOnInit(): void {
     this.generateSeats();
   }
+
+   //click handler
+   seatClicked (seatPos: string)  {
+    var index = this.selected.indexOf(seatPos);
+    
+    if(index !== -1) {
+        // seat already selected, remove
+        this.selected.splice(index, 1)
+    } else {
+        //push to selected array only if it is not reserved
+        if(this.reserved.indexOf(seatPos) === -1)
+            this.selected.push(seatPos);
+    }
+   }
 
   getChar(i: number){
     return String.fromCharCode(i);

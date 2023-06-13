@@ -94,7 +94,7 @@
                <mat-card class="seats">
                     <p>{{getChar(i)}}</p>
                </mat-card> 
-               <mat-card class="seats clmalgin" *ngFor="let k of seatsclmIntheatre">
+               <mat-card class="seats clmalgin" *ngFor="let k of seatsclmIntheatre" (click)="seatClicked(i + k)">
                     <p>{{k}}</p>
                 </mat-card> 
             </div>
