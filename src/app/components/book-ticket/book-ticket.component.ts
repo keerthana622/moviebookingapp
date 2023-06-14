@@ -23,7 +23,8 @@ export class BookTicketComponent implements OnInit {
   public ticketObj = new Ticket();
   public seatsrowIntheatre!:any;
   public seatsclmIntheatre!:any;
-  public selectedSeats: string[] = [];
+  public bookingSeats: string[] = [];
+  public displaySelectedSeat : string = '';
   reserved: string[] = [];
   public seatmat! : SeatModel[][];
 
@@ -63,14 +64,21 @@ export class BookTicketComponent implements OnInit {
    seatClicked (row: number,clm : number)  {    
     if(this.seatmat[row-65][clm].isSelected){
       let selectedSeat = this.getChar(row) + clm.toString();      
-      this.selectedSeats.splice(this.selectedSeats.indexOf(selectedSeat),1);
+      this.bookingSeats.splice(this.bookingSeats.indexOf(selectedSeat),1);
       this.seatmat[row-65][clm].isSelected = false;      
     }else{
       let selectedSeat = this.getChar(row) + clm.toString();
-      this.selectedSeats.push(selectedSeat);
+      this.bookingSeats.push(selectedSeat);
       this.seatmat[row-65][clm].isSelected = true;
     }
-    //console.log(this.selectedSeats);
+    console.log(this.bookingSeats);
+    this.displaySelectedSeat = '';
+    for(let i=0;i<this.bookingSeats.length;i++){
+      
+      this.displaySelectedSeat += (this.bookingSeats[i] + ',');
+
+      
+    } 
    }
 
   getChar(i: number){
@@ -102,25 +110,25 @@ export class BookTicketComponent implements OnInit {
   // }
 
   bookTicket(){
-    // this.ticketObj.email=this.useremail;
-    // this.ticketObj.movieName=this.cardDetails.movieName;
-    // this.ticketObj.theatreName=this.cardDetails.theatreName;
-    // this.ticketObj.numberOfTickets=this.TicketsBooked;
-    // this.ticketObj.seatNumber=this.seats;
+    this.ticketObj.email=this.useremail;
+    this.ticketObj.movieName=this.cardDetails.movieName;
+    this.ticketObj.theatreName=this.cardDetails.theatreName;
+    this.ticketObj.numberOfTickets=this.TicketsBooked;
+    this.ticketObj.seatNumber=this.seats;
 
-    // this.movieService.bookMovie(this.ticketObj)
-    //     .subscribe({
-    //     next:(res)=>{
-    //       this.toastrService.success('Ticket booked successfully',res.message, {
-    //         timeOut: 3000,
-    //       });
-    //       this.router.navigate(['/dashboard']);
-    //     },
-    //     error:(err)=>{  
-    //       this.toastrService.error('Ticket booking failed',err.message, {timeOut: 3000});
-    //     }
-    //   })
-    console.log(this.selectedSeats);
+    this.movieService.bookMovie(this.ticketObj)
+        .subscribe({
+        next:(res)=>{
+          this.toastrService.success('Ticket booked successfully',res.message, {
+            timeOut: 3000,
+          });
+          this.router.navigate(['/dashboard']);
+        },
+        error:(err)=>{  
+          this.toastrService.error('Ticket booking failed',err.message, {timeOut: 3000});
+        }
+      })
+    
   }
 
 }

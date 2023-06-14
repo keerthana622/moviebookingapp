@@ -72,7 +72,7 @@
                             <h3 class="card-text" class="text-muted">Theatre : {{cardDetails.theatreName}}</h3>
                             <h4 class="card-text" class="text-muted">Tickets: <input type="number" 
                                 placeholder="Select no of Tickets" /></h4>
-                            <h4 class="card-text" class="text-muted" >Seats : {{selectedSeats}}</h4>
+                            <h4 class="card-text" class="text-muted" >Seats : {{displaySelectedSeat}}</h4>
     
                         </div>
                     </div>
@@ -89,6 +89,7 @@
         </mat-card>
     </div>
     <div class="seat-container">
+        <p>{{this.bookingSeats}}</p>
         <mat-card>
             <div class="seatsrow" *ngFor="let i of seatsrowIntheatre">
                <mat-card class="seats rowtitle">
