@@ -71,8 +71,8 @@
                             <h4 class="card-text" class="text-muted">User : {{useremail}}.</h4>
                             <h3 class="card-text" class="text-muted">Theatre : {{cardDetails.theatreName}}</h3>
                             <h4 class="card-text" class="text-muted">Tickets: <input type="number" 
-                                placeholder="Select no of Tickets" #Ticketinput (change)="generateSeatNumbers()"/></h4>
-                            <h4 class="card-text" class="text-muted" >Seats : {{seats}}</h4>
+                                placeholder="Select no of Tickets" /></h4>
+                            <h4 class="card-text" class="text-muted" >Seats : {{selectedSeats}}</h4>
     
                         </div>
                     </div>
@@ -91,12 +91,21 @@
     <div class="seat-container">
         <mat-card>
             <div class="seatsrow" *ngFor="let i of seatsrowIntheatre">
-               <mat-card class="seats">
+               <mat-card class="seats rowtitle">
                     <p>{{getChar(i)}}</p>
                </mat-card> 
-               <mat-card class="seats clmalgin" *ngFor="let k of seatsclmIntheatre" (click)="seatClicked(i + k)">
-                    <p>{{k}}</p>
-                </mat-card> 
+               <div *ngFor="let k of seatsclmIntheatre">
+                   <mat-card class="seats clmalgin bookedseats" *ngIf= "seatmat[i-65][k].isBooked;else elseBlock" >
+                        <p>{{k}}</p>
+                    </mat-card> 
+                    <ng-template  #elseBlock >
+                        <mat-card class="seats clmalgin" [ngClass]="{'selectedseatsclr': seatmat[i-65][k].isSelected}" (click)="seatClicked(i , k)">
+                            <p>{{k}}</p>
+                        </mat-card>
+                    </ng-template> 
+                    
+                    
+               </div>
             </div>
         </mat-card>
     </div>

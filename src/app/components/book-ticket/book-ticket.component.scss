@@ -153,5 +153,19 @@ img {
   width: 32px;
   height: 32px;
   border-radius: 100px;
-  background-color: grey;
+  background-color: green;
+  cursor: pointer;
+}
+
+.bookedseats{
+    background-color: gray !important;
+    cursor: none;
+}
+
+.selectedseatsclr{
+  background-color: red;
+}
+
+.rowtitle{
+  background-color: #000;
 }
