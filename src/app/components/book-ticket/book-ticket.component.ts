@@ -25,8 +25,9 @@ export class BookTicketComponent implements OnInit {
   public seatsclmIntheatre!:any;
   public bookingSeats: string[] = [];
   public displaySelectedSeat : string = '';
-  public reserved: string[] = [];
+  public reserved:string[]=[];
   public seatmat! : SeatModel[][];
+  public reservemat!:SeatModel[][];
   public movieDetailsObj = new GetMovieRequest();
   public ticketdata!:any;
 
@@ -41,7 +42,7 @@ export class BookTicketComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateSeats();
-    this.getReservedSeats();
+    
   }
 
   getReservedSeats(){
@@ -49,37 +50,46 @@ export class BookTicketComponent implements OnInit {
      this.movieDetailsObj.theatreName=this.cardDetails.theatreName;
       this.movieService.getBookedTicketDetails(this.movieDetailsObj).subscribe({
         next:(res)=>{
-          console.log(res);
-          this.reserved.push(res.seatNumber);
+          //console.log(res);
+          // this.reserved.push(res);
+          const temp=res;
+          console.log(temp);
+          this.seatSelection(res);
         },
       })
-    //  this.reserved = this.ticketdata.map((el:any) => {
-    //   return el.seatNumber;
-    //  });
-    // this.ticketdata.forEach((item:any) =>{
-    //   this.reserved.push(item[0].seatNumber)
-    // })
-    // for(let i=0;i<this.ticketdata.length;i++)
-    // {
-    //   this.reserved.push(this.ticketdata[i].seatNumber);
-    // }
-     console.log(this.reserved);
+      
+      
   }
 
-  seatSelection(){
-    this.seatmat = [];
+  checkBookedSeats(rowNumber:number,colNumber:number,seatsalreadyresaerved:any){
+    for(var i=0;i<seatsalreadyresaerved.length;i++)
+    {
+      let temp=seatsalreadyresaerved[i].split('');
+      //console.log(temp);
+      console.log((temp[0].charCodeAt(0))-65);
+      if((temp[0].charCodeAt(0))-65==rowNumber && Number(temp[1])==colNumber){
+        return true;
+      }
 
+    }
+    return false;
+  }
+
+  seatSelection(reservedSeat:any){
+  //  console.log(reservedSeat);
+    this.seatmat = [];
     for(var i = 0; i < this.seatsrowIntheatre.length; i++) {
         this.seatmat[i] = [];
         for(var j = 1; j<= 10; j++) {
             let seatmodel = new SeatModel();
             seatmodel.RowNumber = i;
             seatmodel.colNumber = j;
-            seatmodel.isBooked = (j %2 == 0) ? true : false;
+            seatmodel.isBooked = this.checkBookedSeats(seatmodel.RowNumber,seatmodel.colNumber,reservedSeat);
             seatmodel.isSelected = false;
             this.seatmat[i][j] = seatmodel;
+            
         }
-          console.log(this.seatmat);
+         console.log(this.seatmat);
     }
   }
 
@@ -97,7 +107,7 @@ export class BookTicketComponent implements OnInit {
       this.bookingSeats.push(selectedSeat);
       this.seatmat[row-65][clm].isSelected = true;
     }
-    console.log(this.bookingSeats);
+    //console.log(this.bookingSeats);
     this.displaySelectedSeat = '';
     for(let i=0;i<this.bookingSeats.length;i++){
       
@@ -123,9 +133,10 @@ export class BookTicketComponent implements OnInit {
       { length: (stop - start) / step + 1 },
       (value, index) => start + index * step
       );
-      console.log(this.seatsrowIntheatre);
-      console.log(this.seatsclmIntheatre);
-      this.seatSelection();
+      //console.log(this.seatsrowIntheatre);
+      //console.log(this.seatsclmIntheatre);
+      
+      this.getReservedSeats();
   }
 
   // generateSeatNumbers(){
