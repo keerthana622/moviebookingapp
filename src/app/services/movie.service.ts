@@ -30,8 +30,15 @@ export class MovieService {
     this.$cardDataSubject.next(cardDetails);
   }
 
+  
+
   bookMovie(ticketDetails:Ticket) {
      return this.http.post<any>(`${this.baseUrl}/moviename/add`,ticketDetails); 
+  }
+
+  getBookedTicketDetails(movieobj:GetMovieRequest){
+    let queryParams = new HttpParams().append("moviename",movieobj.movieName).append("theatreName",movieobj.theatreName);
+    return this.http.get<any>(`${this.baseUrl}/movies/getBookedMovieDetails/`,{params:queryParams});
   }
 
   updateMovie(movieUpdateObj:GetMovieRequest)

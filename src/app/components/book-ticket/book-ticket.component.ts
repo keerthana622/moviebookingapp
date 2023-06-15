@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { GetMovieRequest } from 'src/app/models/GetMovieRequest';
 import { SeatModel } from 'src/app/models/SeatModel';
 import { Ticket } from 'src/app/models/Ticket';
 import { MovieService } from 'src/app/services/movie.service';
@@ -15,7 +16,6 @@ import { UserService } from 'src/app/services/user.service';
 export class BookTicketComponent implements OnInit {
   @ViewChild('Ticketinput') Ticketinput! : ElementRef ;
 
-  public TicketForm!:FormGroup;
   public cardDetails!:any;
   public useremail!:string;
   public TicketsBooked!:number;
@@ -25,8 +25,10 @@ export class BookTicketComponent implements OnInit {
   public seatsclmIntheatre!:any;
   public bookingSeats: string[] = [];
   public displaySelectedSeat : string = '';
-  reserved: string[] = [];
+  public reserved: string[] = [];
   public seatmat! : SeatModel[][];
+  public movieDetailsObj = new GetMovieRequest();
+  public ticketdata!:any;
 
   constructor(private movieService:MovieService,
     private userService:UserService,
@@ -39,7 +41,29 @@ export class BookTicketComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateSeats();
-    
+    this.getReservedSeats();
+  }
+
+  getReservedSeats(){
+     this.movieDetailsObj.movieName=this.cardDetails.movieName;
+     this.movieDetailsObj.theatreName=this.cardDetails.theatreName;
+      this.movieService.getBookedTicketDetails(this.movieDetailsObj).subscribe({
+        next:(res)=>{
+          console.log(res);
+          this.reserved.push(res.seatNumber);
+        },
+      })
+    //  this.reserved = this.ticketdata.map((el:any) => {
+    //   return el.seatNumber;
+    //  });
+    // this.ticketdata.forEach((item:any) =>{
+    //   this.reserved.push(item[0].seatNumber)
+    // })
+    // for(let i=0;i<this.ticketdata.length;i++)
+    // {
+    //   this.reserved.push(this.ticketdata[i].seatNumber);
+    // }
+     console.log(this.reserved);
   }
 
   seatSelection(){
@@ -61,7 +85,9 @@ export class BookTicketComponent implements OnInit {
 
 
    //click handler
-   seatClicked (row: number,clm : number)  {    
+   seatClicked (row: number,clm : number)  {  
+    this.TicketsBooked=this.Ticketinput.nativeElement.value;
+    if(this.bookingSeats.length<this.TicketsBooked){
     if(this.seatmat[row-65][clm].isSelected){
       let selectedSeat = this.getChar(row) + clm.toString();      
       this.bookingSeats.splice(this.bookingSeats.indexOf(selectedSeat),1);
@@ -76,9 +102,9 @@ export class BookTicketComponent implements OnInit {
     for(let i=0;i<this.bookingSeats.length;i++){
       
       this.displaySelectedSeat += (this.bookingSeats[i] + ',');
-
-      
+      this.displaySelectedSeat.replace(/,*$/,'');
     } 
+   }
    }
 
   getChar(i: number){
@@ -113,8 +139,8 @@ export class BookTicketComponent implements OnInit {
     this.ticketObj.email=this.useremail;
     this.ticketObj.movieName=this.cardDetails.movieName;
     this.ticketObj.theatreName=this.cardDetails.theatreName;
-    this.ticketObj.numberOfTickets=this.TicketsBooked;
-    this.ticketObj.seatNumber=this.seats;
+    this.ticketObj.numberOfTickets=Number(this.TicketsBooked);
+    this.ticketObj.seatNumber=this.bookingSeats;
 
     this.movieService.bookMovie(this.ticketObj)
         .subscribe({
