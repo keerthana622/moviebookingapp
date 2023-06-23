@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'movieticketbookingapp'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E1A51D9D19FA443495CD28414346372C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_38E2B484C2114E518E8124E9DFF9996D }}
           package: .
