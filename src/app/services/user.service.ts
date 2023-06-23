@@ -9,7 +9,8 @@ import jwt_decode from 'jwt-decode';
 })
 export class UserService {
   public decodeToken!:any;
-  private baseUrl:string="https://localhost:7108/user/api/v1.0/moviebooking";
+  //https://localhost:7108/user/api/v1.0/moviebooking
+  private baseUrl:string="https://movieusermicroserviceapp.azurewebsites.net/api/v1.0/moviebooking";
 
   constructor(private http:HttpClient,private router:Router) {
    }

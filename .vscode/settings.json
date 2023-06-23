@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/5ef95bad-0051-405a-a79f-2247954d708a/resourceGroups/my-firstresource/providers/Microsoft.Web/sites/movieticketbookingapp",
+    "appService.deploySubpath": "dist\\moviebookingapp"
+}
